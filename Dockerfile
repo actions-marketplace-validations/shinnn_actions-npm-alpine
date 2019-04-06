@@ -6,9 +6,9 @@ LABEL homepage="http://github.com/shinnn/actions-npm-alpine"
 LABEL maintainer="Shinnosuke Watanabe <snnskwtnb@gmail.com>"
 
 LABEL com.github.actions.name="GitHub Action for npm in Alpine Linux"
-LABEL com.github.actions.description="A fork of \"GitHub Action for npm\", using Alpine Linux instead of Debian"
+LABEL com.github.actions.description="A fork of actions/npm, using Alpine Linux instead of Debian"
 LABEL com.github.actions.icon="package"
-LABEL com.github.actions.color="red"
+LABEL com.github.actions.color="blue"
 COPY LICENSE README.md /
 
 COPY "entrypoint.sh" "/entrypoint.sh"
