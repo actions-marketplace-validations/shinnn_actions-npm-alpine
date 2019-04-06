@@ -1,4 +1,11 @@
-# GitHub Action for NPM
+# GitHub Action for npm in Alpine Linux
+
+This [GitHub action](https://developer.github.com/actions/) is a fork of [GitHub Action for npm](https://github.com/actions/npm) with the following differences from the original action:
+
+* use [Alpine Linux](https://alpinelinux.org) instead of [Debian](https://www.debian.org/) for faster `docker pull`
+* update [Node.js](https://nodejs.org/) from v10.x to v11.x
+
+-----
 
 This Action for [npm](https://www.npmjs.com/) enables arbitrary actions with the `npm` command-line client, including testing packages and publishing to a registry.
 
@@ -13,26 +20,26 @@ workflow "Build, Test, and Publish" {
 }
 
 action "Build" {
-  uses = "actions/npm@master"
+  uses = "shinnn/actions-npm-alpine@master"
   args = "install"
 }
 
 action "Test" {
   needs = "Build"
-  uses = "actions/npm@master"
+  uses = "shinnn/actions-npm-alpine@master"
   args = "test"
 }
 
 # Filter for a new tag
 action "Tag" {
   needs = "Test"
-  uses = "actions/bin/filter@master"
+  uses = "shinnn/actions-npm-alpine@master"
   args = "tag"
 }
 
 action "Publish" {
   needs = "Tag"
-  uses = "actions/npm@master"
+  uses = "shinnn/actions-npm-alpine@master"
   args = "publish --access public"
   secrets = ["NPM_AUTH_TOKEN"]
 }
@@ -54,7 +61,7 @@ To authenticate with, and publish to, a secure registry other than `registry.npm
 
 ```hcl
 action "Publish" {
-  uses = "actions/npm@master"
+  uses = "shinnn/actions-npm-alpine@master"
   args = "publish --access public"
   env = {
     NPM_REGISTRY_URL = "someOtherRegistry.someDomain.net"
@@ -68,7 +75,7 @@ To authenticate with, and publish to, an insecure registry other than `registry.
 
 ```hcl
 action "Publish" {
-  uses = "actions/npm@master"
+  uses = "shinnn/actions-npm-alpine@master"
   args = "publish --access public"
   env = {
     NPM_REGISTRY_URL = "my.local.registry"
@@ -79,6 +86,4 @@ action "Publish" {
 ```
 ## License
 
-The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](LICENSE).
-
-Container images built with this project include third party materials. See [THIRD_PARTY_NOTICE.md](THIRD_PARTY_NOTICE.md) for details.
+The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](./LICENSE).
